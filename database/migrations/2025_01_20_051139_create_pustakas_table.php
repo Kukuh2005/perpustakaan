@@ -29,7 +29,7 @@ return new class extends Migration
             $table->integer('harga_buku');
             $table->string('kondisi_buku');
             $table->enum('fp', ['0', '1']);
-            $table->integer('jml_pinjam');
+            $table->integer('jml_pinjam')->default('0');
             $table->integer('denda_terlambat');
             $table->integer('denda_hilang');
             $table->timestamps();
