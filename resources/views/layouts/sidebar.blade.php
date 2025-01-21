@@ -1,7 +1,7 @@
 <ul class="navbar-nav bg-gradient-warning sidebar sidebar-dark accordion" id="accordionSidebar">
 
     <!-- Sidebar - Brand -->
-    <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
+    <a class="sidebar-brand d-flex align-items-center justify-content-center" href="{{route('dashboard.index')}}">
         <div class="sidebar-brand-icon rotate-n-15">
             <i class="fas fa-book"></i>
         </div>
@@ -12,8 +12,8 @@
     <hr class="sidebar-divider my-0">
 
     <!-- Nav Item - Dashboard -->
-    <li class="nav-item {{Route::is('dashboard') ? 'active' : ''}} ">
-        <a class="nav-link" href="{{route('dashboard')}}">
+    <li class="nav-item {{Route::is('dashboard.index') ? 'active' : ''}} ">
+        <a class="nav-link" href="{{route('dashboard.index')}}">
             <i class="fas fa-fw fa-tachometer-alt"></i>
             <span>Dashboard</span></a>
     </li>
@@ -62,17 +62,23 @@
     </li>
 
     <!-- Nav Item - Utilities Collapse Menu -->
-    <li class="nav-item">
+    <li class="nav-item 
+    {{Route::is('jenis-anggota.index') ? 'active' : ''}}
+    {{Route::is('anggota.index') ? 'active' : ''}}
+    ">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities"
             aria-expanded="true" aria-controls="collapseUtilities">
             <i class="fas fa-users"></i>
             <span>Data Anggota</span>
         </a>
-        <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
+        <div id="collapseUtilities" class="collapse
+        {{Route::is('jenis-anggota.index') ? 'show' : ''}}
+        {{Route::is('anggota.index') ? 'show' : ''}}
+        " aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
                 <h6 class="collapse-header">Manajemen Anggota:</h6>
-                <a class="collapse-item" href="/jenis">Jenis</a>
-                <a class="collapse-item" href="/anggota">Anggota</a>
+                <a class="collapse-item {{Route::is('jenis-anggota.index') ? 'active text-warning' : ''}}" href="{{route('jenis-anggota.index')}}">Jenis</a>
+                <a class="collapse-item {{Route::is('anggota.index') ? 'active text-warning' : ''}}" href="{{route('anggota.index')}}">Anggota</a>
             </div>
         </div>
     </li>

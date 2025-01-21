@@ -2,9 +2,9 @@
 <div class="modal fade" tabindex="-1" id="edit{{$item->id}}">
     <div class="modal-dialog">
         <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title text-warning">Edit Data {{$item->format}}</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <div class="modal-header bg-gradient-warning">
+                <h5 class="modal-title text-white">Edit Data {{$item->format}}</h5>
+                <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
@@ -34,7 +34,7 @@
                     </div>
             </div>
             <div class="modal-footer">
-                <button type="submit" class="btn btn-primary">Simpan</button>
+                <button type="submit" class="btn btn-warning">Update</button>
                 </form>
             </div>
         </div>

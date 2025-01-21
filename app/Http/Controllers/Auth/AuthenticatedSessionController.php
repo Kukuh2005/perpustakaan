@@ -28,7 +28,7 @@ class AuthenticatedSessionController extends Controller
 
         $request->session()->regenerate();
 
-        return redirect(route('dashboard'))->with('sukses', 'Selamat Datang ' . Auth::user()->name . ', Kamu Login Sebagai ' . Auth::user()->role);
+        return redirect(route('dashboard.index'))->with('sukses', 'Selamat Datang ' . Auth::user()->name . ', Kamu Login Sebagai ' . Auth::user()->role);
     }
 
     /**

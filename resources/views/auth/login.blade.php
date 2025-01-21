@@ -44,7 +44,7 @@
                                     <div class="text-center">
                                         <h1 class="h4 text-gray-900 mb-4">Login!</h1>
                                     </div>
-                                    <form href="{{route('login')}}" method="post" class="user">
+                                    <form action="{{route('postlogin')}}" method="post" class="user">
                                         @csrf
                                         <div class="form-group">
                                             <input type="email" class="form-control form-control-user"

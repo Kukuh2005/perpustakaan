@@ -2,9 +2,9 @@
 <div class="modal fade" tabindex="-1" id="delete{{$item->id}}">
     <div class="modal-dialog">
         <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title text-danger">Hapus Data {{$item->gelar_depan}} {{$item->nama_pengarang}} {{$item->gelar_belakang}}</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <div class="modal-header bg-gradient-danger text-white">
+                <h5 class="modal-title">Hapus Data {{$item->gelar_depan}} {{$item->nama_pengarang}} {{$item->gelar_belakang}}</h5>
+                <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>

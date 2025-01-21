@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Models\JenisAnggota;
 
 class Anggota extends Model
 {
@@ -11,4 +12,8 @@ class Anggota extends Model
         'alamat', 'no_telp', 'email', 'tgl_daftar', 'tgl_aktif', 'fa',
         'keterangan', 'foto', 'username', 'password'
     ];
+
+    public function jenisAnggota(){
+        return $this->belongsTo(JenisAnggota::class, 'id_jenis_anggota');
+    }
 }

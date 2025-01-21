@@ -56,7 +56,7 @@ class RegisteredUserController extends Controller
         if(strpos($email, '@admin.com') !== false){
             return 'admin';
         }else{
-            return 'operator';
+            return 'anggota';
         }
     }
 }

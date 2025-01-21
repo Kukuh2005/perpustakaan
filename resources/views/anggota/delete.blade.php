@@ -1,18 +1,18 @@
-@foreach($ddc as $item)
-<div class="modal fade" tabindex="-1" id="delete{{$item->id}}">
+@foreach($anggota as $item)
+<div class="modal fade" tabindex="-1" id="delete{{ $item->id }}" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
-            <div class="modal-header bg-gradient-danger">
-                <h5 class="modal-title text-white">Hapus Data {{$item->ddc}}</h5>
+            <div class="modal-header bg-gradient-danger text-white">
+                <h5 class="modal-title">Hapus Data Anggota <strong>{{ $item->nama_anggota }}</strong></h5>
                 <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-body">
-                <form action="{{route('ddc.destroy', $item->id)}}" method="post">
-                    @method('DELETE')
+                <form action="{{ route('anggota.destroy', $item->id) }}" method="post">
                     @csrf
-                    <p class="text-center">Hapus Data <span class="text-danger">{{$item->ddc}}</span>?. <br> Data yang sudah dihapus tidak dapat dikembalikan.</p>
+                    @method('DELETE')
+                    <p class="text-center">Apakah Anda yakin ingin menghapus anggota <strong>{{ $item->nama_anggota }}</strong>? Data yang dihapus tidak dapat dikembalikan.</p>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>

@@ -24,7 +24,7 @@ return new class extends Migration
             $table->date('tgl_daftar');
             $table->date('tgl_aktif');
             $table->enum('fa', ['Y', 'T']);
-            $table->string('keterangan');
+            $table->string('keterangan')->nullable();
             $table->string('foto');
             $table->string('username');
             $table->string('password');

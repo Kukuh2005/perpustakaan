@@ -1,9 +1,9 @@
 <div class="modal fade" tabindex="-1" id="form-tambah" aria-hidden="true">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title text-success">Tambah Data Penerbit</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <div class="modal-header bg-gradient-success">
+                <h5 class="modal-title text-white">Tambah Data Penerbit</h5>
+                <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>

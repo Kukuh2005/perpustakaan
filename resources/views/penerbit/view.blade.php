@@ -2,7 +2,7 @@
 <div class="modal fade" tabindex="-1" role="dialog" id="view{{ $item->id }}">
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
-            <div class="modal-header bg-warning text-white">
+            <div class="modal-header bg-gradient-info text-white">
                 <h5 class="modal-title">
                     <i class="fas fa-info-circle"></i> Detail Penerbit - <span class="font-weight-bold align-middle">{{ $item->kode_penerbit }}</span>
                 </h5>

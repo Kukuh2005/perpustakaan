@@ -16,7 +16,7 @@ class OperatorMiddleware
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if(Auth::user()->role == 'operator'){
+        if(Auth::user()->role == 'anggota'){
             return $next($request);
         }
 

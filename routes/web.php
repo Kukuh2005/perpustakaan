@@ -11,15 +11,19 @@ use App\Http\Controllers\FormatController;
 use App\Http\Controllers\PenerbitController;
 use App\Http\Controllers\PengarangController;
 use App\Http\Controllers\PustakaController;
+use App\Http\Controllers\JenisAnggotaController;
+use App\Http\Controllers\AnggotaController;
 
 Route::get('/', [AuthenticatedSessionController::class, 'create']);
-Route::get('/postlogin', [AuthenticatedSessionController::class, 'create'])->name('login');
-Route::get('/logout', [AuthenticatedSessionController::class, 'destroy']);
+Route::get('/login', [AuthenticatedSessionController::class, 'create'])->name('login'); // Halaman Login
+Route::post('/postlogin', [AuthenticatedSessionController::class, 'store'])->name('postlogin'); // Proses Login
+Route::post('/logout', [AuthenticatedSessionController::class, 'destroy'])->name('logout'); // Logout
+
 Route::get('/register', [RegisteredUserController::class, 'create']);
-Route::get('/register/store', [RegisteredUserController::class, 'store']);
+Route::post('/register/store', [RegisteredUserController::class, 'store']);
 
 Route::middleware(['auth', 'adminMiddleware'])->group(function(){
-    Route::get('admin/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+    Route::resource('admin/dashboard', DashboardController::class);
     
     Route::resource('admin/rak', RakController::class);
     Route::resource('admin/ddc', DdcController::class);
@@ -27,6 +31,8 @@ Route::middleware(['auth', 'adminMiddleware'])->group(function(){
     Route::resource('admin/penerbit', PenerbitController::class);
     Route::resource('admin/pengarang', PengarangController::class);
     Route::resource('admin/pustaka', PustakaController::class);
+    Route::resource('admin/jenis-anggota', JenisAnggotaController::class);
+    Route::resource('admin/anggota', AnggotaController::class);
 });
 
 // Route::get('/', function () {
