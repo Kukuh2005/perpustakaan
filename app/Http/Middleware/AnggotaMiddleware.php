@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Illuminate\Support\Facades\Auth;
 
-class OperatorMiddleware
+class AnggotaMiddleware
 {
     /**
      * Handle an incoming request.
@@ -19,7 +19,6 @@ class OperatorMiddleware
         if(Auth::user()->role == 'anggota'){
             return $next($request);
         }
-
-        return abort(403, 'unauthorize');
+        return abort(403, 'Unauthorize');
     }
 }

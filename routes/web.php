@@ -13,6 +13,7 @@ use App\Http\Controllers\PengarangController;
 use App\Http\Controllers\PustakaController;
 use App\Http\Controllers\JenisAnggotaController;
 use App\Http\Controllers\AnggotaController;
+use App\Http\Controllers\TransaksiController;
 
 Route::get('/', [AuthenticatedSessionController::class, 'create']);
 Route::get('/login', [AuthenticatedSessionController::class, 'create'])->name('login'); // Halaman Login
@@ -22,7 +23,7 @@ Route::post('/logout', [AuthenticatedSessionController::class, 'destroy'])->name
 Route::get('/register', [RegisteredUserController::class, 'create']);
 Route::post('/register/store', [RegisteredUserController::class, 'store']);
 
-Route::middleware(['auth', 'adminMiddleware'])->group(function(){
+Route::middleware(['auth', 'roleAdmin:admin'])->group(function(){
     Route::resource('admin/dashboard', DashboardController::class);
     
     Route::resource('admin/rak', RakController::class);
@@ -33,8 +34,11 @@ Route::middleware(['auth', 'adminMiddleware'])->group(function(){
     Route::resource('admin/pustaka', PustakaController::class);
     Route::resource('admin/jenis-anggota', JenisAnggotaController::class);
     Route::resource('admin/anggota', AnggotaController::class);
+    Route::resource('admin/transaksi', TransaksiController::class);
 });
-
+Route::middleware(['auth', 'roleAnggota:anggota'])->group(function(){
+    Route::resource('anggota/dashboard', DashboardController::class);
+});
 // Route::get('/', function () {
 //     return view('layouts.app');
 // });

@@ -20,6 +20,7 @@
 
     <!-- Custom styles for this template-->
     <link href="assets/css/sb-admin-2.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{{asset('assets/vendor/izitoast/css/iziToast.min.css')}}">
 
 </head>
 
@@ -91,6 +92,25 @@
 
     <!-- Custom scripts for all pages-->
     <script src="assets/js/sb-admin-2.min.js"></script>
+    <script src="{{asset('assets/vendor/izitoast/js/iziToast.min.js')}}"></script>
+
+    @if(session('sukses'))
+    <script>
+      iziToast.success({
+      title: 'Berhasil',
+      message: '{{session('sukses')}}',
+      position: 'topRight'
+      });
+    </script>
+    @elseif(session('gagal'))
+    <script>
+      iziToast.error({
+      title: 'Gagal',
+      message: '{{session('gagal')}}',
+      position: 'topRight'
+      });
+    </script>
+    @endif
 
 </body>
 

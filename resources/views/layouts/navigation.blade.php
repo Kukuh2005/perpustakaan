@@ -68,9 +68,13 @@
                     Activity Log
                 </a>
                 <div class="dropdown-divider"></div>
-                <a class="dropdown-item" href="{{route('logout')}}">
-                    <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
-                    Logout
+                <form action="{{route('logout')}}" method="post">
+                    <button type="submit" class="dropdown-item">
+                        @csrf
+                        <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
+                        Logout
+                    </button>
+                </form>
                 </a>
             </div>
         </li>

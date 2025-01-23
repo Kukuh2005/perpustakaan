@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Anggota;
+use App\Models\User;
 use App\Models\JenisAnggota;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
@@ -73,6 +74,14 @@ class AnggotaController extends Controller
 
             $anggota->save();
 
+            $user = new User;
+            $user->name = $request->username;
+            $user->email = $request->email;
+            $user->password = Hash::make($request->password);
+            $user->role = 'anggota';
+            $user->status = 'success';
+            $user->save();
+
             return back()->with('sukses', 'Berhasil Tambah Data');
         } catch (\Exception $e) {
             return back()->with('gagal', 'Gagal Tambah Data: ' . $e->getMessage());
@@ -86,6 +95,12 @@ class AnggotaController extends Controller
     {
         try {
             $anggota = Anggota::findOrFail($id);
+
+            $user_anggota = User::where('email', $anggota->email)->first();//ambil user berdasarkan email anggota
+
+            $user_anggota->name = $request->username;
+            $user_anggota->email = $request->email;
+            $user_anggota->update();//update user
 
             $anggota->id_jenis_anggota = $request->id_jenis_anggota;
             $anggota->nama_anggota = $request->nama_anggota;
@@ -103,6 +118,7 @@ class AnggotaController extends Controller
             //jika rubah password
             if($request->password != null){
                 $anggota->password =  Hash::make($request->password);
+                $user_anggota->password =  Hash::make($request->password);
             }
 
             // Proses file foto (jika ada)
@@ -119,7 +135,8 @@ class AnggotaController extends Controller
                 $anggota->foto = $path;
             }
 
-            $anggota->save();
+            $anggota->update();
+
 
             return back()->with('sukses', 'Berhasil Update Data');
         } catch (\Exception $e) {
@@ -134,13 +151,14 @@ class AnggotaController extends Controller
     {
         try {
             $anggota = Anggota::find($id);
+            $user_anggota = User::where('email', $anggota->email)->first()->delete();//hapus data user
 
             // Hapus foto lama jika ada
             if ($anggota->foto && \Storage::disk('public')->exists($anggota->foto)) {
                 \Storage::disk('public')->delete($anggota->foto);
             }
 
-            $anggota->delete();
+            $anggota->delete();            
 
             return back()->with('sukses', 'Berhasil Hapus Data');
         } catch (\Exception $e) {

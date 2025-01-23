@@ -75,7 +75,6 @@ class PustakaController extends Controller
             $pustaka->harga_buku = $request->harga_buku;
             $pustaka->kondisi_buku = $request->kondisi_buku;
             $pustaka->fp = $request->fp;
-            $pustaka->jml_pinjam = $request->jml_pinjam;
             $pustaka->denda_terlambat = $request->denda_terlambat;
             $pustaka->denda_hilang = $request->denda_hilang;
 
@@ -137,7 +136,6 @@ class PustakaController extends Controller
             $pustaka->harga_buku = $request->harga_buku;
             $pustaka->kondisi_buku = $request->kondisi_buku;
             $pustaka->fp = $request->fp;
-            $pustaka->jml_pinjam = $request->jml_pinjam;
             $pustaka->denda_terlambat = $request->denda_terlambat;
             $pustaka->denda_hilang = $request->denda_hilang;
 

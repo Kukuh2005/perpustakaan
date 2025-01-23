@@ -57,6 +57,13 @@
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
+                                <label for="tgl_daftar">Tanggal Aktif</label>
+                                <input type="date" class="form-control" id="tgl_aktif" name="tgl_aktif"
+                                    value="<?php echo date('Y-m-d') ?>" required>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
                                 <label for="no_telp">Nomor Telepon</label>
                                 <input type="text" class="form-control" id="no_telp" name="no_telp">
                             </div>
@@ -95,7 +102,7 @@
                                 </select>
                             </div>
                         </div>
-                        <div class="col-md-6">
+                        <div class="col-md-12">
                             <div class="form-group">
                                 <label for="keterangan">Keterangan</label>
                                 <input type="text" class="form-control" id="keterangan" name="keterangan">

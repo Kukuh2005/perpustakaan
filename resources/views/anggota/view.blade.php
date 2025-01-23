@@ -22,8 +22,8 @@
                             <li class="list-group-item"><strong>Kode Anggota:</strong> {{ $item->kode_anggota }}</li>
                             <li class="list-group-item"><strong>Nama:</strong> {{ $item->nama_anggota }}</li>
                             <li class="list-group-item"><strong>Jenis Anggota:</strong> {{ $item->jenisAnggota->nama_jenis_anggota }}</li>
-                            <li class="list-group-item"><strong>Tanggal Lahir:</strong> {{ $item->tgl_lahir }}</li>
-                            <li class="list-group-item"><strong>Tempat Lahir:</strong> {{ $item->tempat }}</li>
+                            <li class="list-group-item"><strong>Ttl:</strong> {{ $item->tempat }}, {{ $item->tgl_lahir }}</li>
+                            <li class="list-group-item"><strong>Tanggal Aktif:</strong> {{ $item->tgl_aktif }}</li>
                         </ul>
                     </div>
                     <div class="col-md-6">

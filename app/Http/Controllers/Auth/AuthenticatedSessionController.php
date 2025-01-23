@@ -8,6 +8,7 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\View\View;
+use App\Models\User;
 
 class AuthenticatedSessionController extends Controller
 {
@@ -25,10 +26,16 @@ class AuthenticatedSessionController extends Controller
     public function store(LoginRequest $request): RedirectResponse
     {
         $request->authenticate();
-
+        
         $request->session()->regenerate();
+        
+        $user = User::where('email', $request->email)->first();
 
-        return redirect(route('dashboard.index'))->with('sukses', 'Selamat Datang ' . Auth::user()->name . ', Kamu Login Sebagai ' . Auth::user()->role);
+        if($user->status == 'pending'){
+            return back()->with('gagal', 'Status Akun: Panding');
+        }
+
+        return redirect($user->role . '/dashboard')->with('sukses', 'Selamat Datang ' . Auth::user()->name . ', Kamu Login Sebagai ' . Auth::user()->role);
     }
 
     /**

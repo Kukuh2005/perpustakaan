@@ -40,8 +40,8 @@
                         <ul class="list-group list-group-flush">
                             <li class="list-group-item"><strong>Keterangan Fisik:</strong> <span class="text-muted">{{ $item->keterangan_fisik }}</span></li>
                             <li class="list-group-item"><strong>Keterangan Tambahan:</strong> <span class="text-muted">{{ $item->keterangan_tambahan }}</span></li>
-                            <li class="list-group-item"><strong>Abstraksi:</strong></li>
-                            <li class="list-group-item text-justify text-muted">{{ $item->abstraksi }}</li>
+                            <li class="list-group-item"><strong>Abstraksi:</strong> <span class="text-muted">{{ $item->abstraksi }}</span></li>
+                            <li class="list-group-item"><strong>Jumlah Pinjam:</strong> <span class="text-muted">{{ $item->jml_pinjam }}</span></li>
                         </ul>
                     </div>
                 </div>

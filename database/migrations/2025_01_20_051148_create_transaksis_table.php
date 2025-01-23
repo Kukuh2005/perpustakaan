@@ -19,6 +19,7 @@ return new class extends Migration
             $table->date('tgl_kembali');
             $table->date('tgl_pengembalian')->nullable();
             $table->enum('fp', ['0', '1']);
+            $table->float('denda')->default('0');
             $table->string('keterangan')->nullable();
             $table->timestamps();
         });

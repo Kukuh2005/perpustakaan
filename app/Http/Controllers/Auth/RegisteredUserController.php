@@ -35,20 +35,19 @@ class RegisteredUserController extends Controller
             'password' => ['required'],
         ]);
 
-        $role = $this->cekEmail($request->email);
+        $user = new User;
+        $user->name = $request->name;
+        $user->email = $request->email;
+        $user->password = Hash::make($request->password);
+        $user->role = $this->cekEmail($request->email);
+        $user->status = 'pending';
+        $user->save();
 
-        $user = User::create([
-            'name' => $request->name,
-            'email' => $request->email,
-            'password' => Hash::make($request->password),
-            'role' => $role,
-        ]);
+        // event(new Registered($user));
 
-        event(new Registered($user));
+        // Auth::login($user);
 
-        Auth::login($user);
-
-        return redirect()->route('dashboard')->with('sukses', 'Selamat Datang ' . $user->name . ', Kamu Terdaftar sebagai ' . $role);
+        return redirect()->route('login')->with('sukses', 'Berhasil Register, Admin Akan Melakukan Verifikasi Akun Anda.');
     }
 
     private function cekEmail($email)
@@ -56,7 +55,7 @@ class RegisteredUserController extends Controller
         if(strpos($email, '@admin.com') !== false){
             return 'admin';
         }else{
-            return 'anggota';
+            return back()->with('gagal', 'Hubungi Admin!.');
         }
     }
 }
