@@ -40,7 +40,14 @@
                                 <td>{{$item->tgl_pinjam}}</td>
                                 <td>{{$item->tgl_kembali}}</td>
                                 <td>Rp.{{number_format($item->denda)}}</td>
-                                <td><span class="badge {{ $item->fp == 1 ? 'badge-success' : 'badge-warning' }} {{$item->fp == 2 ? 'badge-danger' : ''}}">{{ $item->fp == 0 ? 'Dipinjam' : '' }}{{ $item->fp == 1 ? 'Selesai' : '' }}{{ $item->fp == 2 ? 'Hilang' : '' }}</span></td>
+                                <td>
+                                    <span class="badge {{ $item->fp == 0 ? 'badge-warning' : '' }} {{ $item->fp == 1 ? 'badge-success' : '' }} {{$item->fp == 2 ? 'badge-danger' : ''}} {{ $item->fp == 3 ? 'badge-info' : '' }}">
+                                    {{ $item->fp == 0 ? 'Dipinjam' : '' }}
+                                    {{ $item->fp == 1 ? 'Selesai' : '' }}
+                                    {{ $item->fp == 2 ? 'Hilang' : '' }}
+                                    {{ $item->fp == 3 ? 'Request' : '' }}
+                                    </span>
+                                </td>
                                 <td>
                                     <button class="btn btn-warning btn-circle btn-sm" data-toggle="modal" data-target="#edit{{$item->id}}"><i class="fas fa-edit"></i></button>
                                 </td>

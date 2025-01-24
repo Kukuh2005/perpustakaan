@@ -15,8 +15,8 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('id_pustaka');
             $table->unsignedBigInteger('id_anggota');
-            $table->date('tgl_pinjam');
-            $table->date('tgl_kembali');
+            $table->date('tgl_pinjam')->nullable();
+            $table->date('tgl_kembali')->nullable();
             $table->date('tgl_pengembalian')->nullable();
             $table->enum('fp', ['0', '1']);
             $table->float('denda')->default('0');

@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Transaksi;
+use App\Models\Pustaka;
+use Carbon\Carbon;
 
 class DashboardController extends Controller
 {
@@ -11,7 +14,14 @@ class DashboardController extends Controller
      */
     public function index()
     {
-        return view('dashboard.index');
+        $now = Carbon::now();
+        $hari_ini = now()->year . '-' . now()->month . '-' . now()->day;
+
+        $request = Transaksi::where('fp', '3')->get();
+        $buku = Pustaka::where('fp', '1')->get();
+        $buku_kembali = Transaksi::where('tgl_kembali', $hari_ini)->get();
+
+        return view('dashboard.index', compact('request', 'buku', 'buku_kembali'));
     }
 
     /**

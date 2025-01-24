@@ -39,12 +39,12 @@
             aria-labelledby="headingBuku" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
                 <h6 class="collapse-header text-muted">Manajemen Buku:</h6>
-                <a class="collapse-item {{Route::is('rak.index') ? 'active text-warning' : ''}}" href="{{route('rak.index')}}">Rak</a>
-                <a class="collapse-item {{Route::is('ddc.index') ? 'active text-warning' : ''}}" href="{{route('ddc.index')}}">DDC</a>
-                <a class="collapse-item {{Route::is('format.index') ? 'active text-warning' : ''}}" href="{{route('format.index')}}">Format</a>
-                <a class="collapse-item {{Route::is('penerbit.index') ? 'active text-warning' : ''}}" href="{{route('penerbit.index')}}">Penerbit</a>
-                <a class="collapse-item {{Route::is('pengarang.index') ? 'active text-warning' : ''}}" href="{{route('pengarang.index')}}">Pengarang</a>
-                <a class="collapse-item {{Route::is('pustaka.index') ? 'active text-warning' : ''}}" href="{{route('pustaka.index')}}">Pustaka</a>
+                <a class="collapse-item {{Route::is('rak.index') ? 'active text-warning' : ''}}" href="/{{auth()->user()->role}}/rak">Rak</a>
+                <a class="collapse-item {{Route::is('ddc.index') ? 'active text-warning' : ''}}" href="/{{auth()->user()->role}}/ddc">DDC</a>
+                <a class="collapse-item {{Route::is('format.index') ? 'active text-warning' : ''}}" href="/{{auth()->user()->role}}/format">Format</a>
+                <a class="collapse-item {{Route::is('penerbit.index') ? 'active text-warning' : ''}}" href="/{{auth()->user()->role}}/penerbit">Penerbit</a>
+                <a class="collapse-item {{Route::is('pengarang.index') ? 'active text-warning' : ''}}" href="/{{auth()->user()->role}}/pengarangn">Pengarang</a>
+                <a class="collapse-item {{Route::is('pustaka.index') ? 'active text-warning' : ''}}" href="/{{auth()->user()->role}}/pustaka">Pustaka</a>
             </div>
         </div>
     </li>
@@ -61,8 +61,8 @@
             aria-labelledby="headingAnggota" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
                 <h6 class="collapse-header text-muted">Manajemen Anggota:</h6>
-                <a class="collapse-item {{Route::is('jenis-anggota.index') ? 'active text-warning' : ''}}" href="{{route('jenis-anggota.index')}}">Jenis</a>
-                <a class="collapse-item {{Route::is('anggota.index') ? 'active text-warning' : ''}}" href="{{route('anggota.index')}}">Anggota</a>
+                <a class="collapse-item {{Route::is('jenis-anggota.index') ? 'active text-warning' : ''}}" href="/{{auth()->user()->role}}/jenis">Jenis</a>
+                <a class="collapse-item {{Route::is('anggota.index') ? 'active text-warning' : ''}}" href="/{{auth()->user()->role}}/anggota">Anggota</a>
             </div>
         </div>
     </li>
@@ -72,7 +72,7 @@
     @endif
     
     <li class="nav-item {{Route::is('transaksi.index') ? 'active' : ''}}">
-        <a class="nav-link" href="{{route('transaksi.index')}}">
+        <a class="nav-link" href="/{{auth()->user()->role}}/transaksi">
             <i class="fas fa-fw fa-shopping-cart"></i>
             <span>Transaksi</span></a>
     </li>
