@@ -69,14 +69,23 @@
     
     <!-- Divider -->
     <hr class="sidebar-divider my-0">
-    @endif
     
     <li class="nav-item {{Route::is('transaksi.index') ? 'active' : ''}}">
         <a class="nav-link" href="/{{auth()->user()->role}}/transaksi">
             <i class="fas fa-fw fa-shopping-cart"></i>
-            <span>Transaksi</span></a>
+            <span>Transaksi</span>
+        </a>
     </li>
+    @endif
     
+    <hr class="sidebar-divider my-0">
+    
+    <li class="nav-item {{Route::is('laporan.index') ? 'active' : ''}}">
+        <a class="nav-link" href="/{{auth()->user()->role}}/laporan">
+            <i class="fas fa-fw fa-file"></i>
+            <span>Laporan</span>
+        </a>
+    </li>
 
     <!-- Divider -->
     <hr class="sidebar-divider d-none d-md-block">

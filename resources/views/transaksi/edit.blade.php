@@ -38,13 +38,29 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label for="exampleInputPassword1">Tanggal Pinjam</label>
-                                <input type="date" class="form-control" id="exampleInputPassword1" name="tgl_pinjam" value="{{$item->tgl_pinjam}}" required>
+                                <input type="date" class="form-control" id="exampleInputPassword1" name="tgl_pinjam" 
+                                @if($item->tgl_pinjam == '')
+                                min="<?php echo date('Y-m-d') ?>"
+                                value="<?php echo date('Y-m-d') ?>"
+                                @else
+                                min="{{$item->tgl_pinjam}}"
+                                value="{{$item->tgl_pinjam}}"
+                                @endif
+                                  required>
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label for="exampleInputPassword1">Tanggal Kembali</label>
-                                <input type="date" class="form-control" id="exampleInputPassword1" name="tgl_kembali" value="{{$item->tgl_kembali}}" min="{{$item->tgl_pinjam}}" required>
+                                <input type="date" class="form-control" id="exampleInputPassword1" name="tgl_kembali"
+                                @if($item->tgl_pinjam == '')
+                                min="<?php echo date('Y-m-d') ?>"
+                                value="<?php echo date('Y-m-d') ?>"
+                                @else
+                                min="{{$item->tgl_pinjam}}"
+                                value="{{$item->tgl_kembali}}"
+                                @endif
+                                 required>
                             </div>
                         </div>
                         <div class="col-md-6">
@@ -61,7 +77,14 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label for="exampleInputPassword1">Tanggal Pengembalian</label>
-                                <input type="date" class="form-control" id="exampleInputPassword1" name="rgl_pengembalian" value="<?php echo date('Y-m-d') ?>" required>
+                                <input type="date" class="form-control" id="exampleInputPassword1" name="tgl_pengembalian"
+                                @if($item->tgl_pinjam == '')
+                                value="<?php echo date('Y-m-d') ?>"
+                                @else
+                                value="{{$item->tgl_pengembalian}}" 
+                                min="{{$item->tgl_pinjam}}" 
+                                @endif
+                                required>
                             </div>
                         </div>
                         <div class="col-md-12">

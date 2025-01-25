@@ -40,7 +40,7 @@ class RegisteredUserController extends Controller
         $user->email = $request->email;
         $user->password = Hash::make($request->password);
         $user->role = $this->cekEmail($request->email);
-        $user->status = 'pending';
+        $user->status = 'success';
         $user->save();
 
         // event(new Registered($user));

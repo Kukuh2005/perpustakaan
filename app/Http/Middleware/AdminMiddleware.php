@@ -14,9 +14,9 @@ class AdminMiddleware
      *
      * @param  \Closure(\Illuminate\Http\Request): (\Symfony\Component\HttpFoundation\Response)  $next
      */
-    public function handle(Request $request, Closure $next): Response
+    public function handle(Request $request, Closure $next, $role): Response
     {
-        if(Auth::user()->role == 'admin'){
+        if(auth()->check() && auth()->user()->role === $role){
             return $next($request);
         }
         return abort(403, 'Unauthorize');
