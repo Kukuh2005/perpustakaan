@@ -15,6 +15,7 @@ use App\Http\Controllers\JenisAnggotaController;
 use App\Http\Controllers\AnggotaController;
 use App\Http\Controllers\TransaksiController;
 use App\Http\Controllers\LaporanController;
+use App\Http\Controllers\PerpustakaanController;
 
 Route::get('/', [AuthenticatedSessionController::class, 'create']);
 Route::get('/login', [AuthenticatedSessionController::class, 'create'])->name('login'); // Halaman Login
@@ -36,6 +37,7 @@ Route::middleware(['auth', 'roleAdmin:admin'])->group(function(){
     Route::resource('admin/jenis-anggota', JenisAnggotaController::class);
     Route::resource('admin/anggota', AnggotaController::class);
     Route::resource('admin/transaksi', TransaksiController::class);
+    Route::resource('admin/perpustakaan', PerpustakaanController::class);
     
     Route::resource('admin/laporan', LaporanController::class);
     Route::post('admin/laporan/print-bulan', [LaporanController::class, 'printBulan'])->name('laporan.printBulan');

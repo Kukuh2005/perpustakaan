@@ -86,7 +86,15 @@
             <span>Laporan</span>
         </a>
     </li>
-
+    
+    <hr class="sidebar-divider my-0">
+    
+    <li class="nav-item {{Route::is('perpustakaan.index') ? 'active' : ''}}">
+        <a class="nav-link" href="/{{auth()->user()->role}}/perpustakaan">
+            <i class="fas fa-book-reader"></i>
+            <span>Perpustakaan</span>
+        </a>
+    </li>
     <!-- Divider -->
     <hr class="sidebar-divider d-none d-md-block">
 
