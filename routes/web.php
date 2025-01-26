@@ -45,6 +45,8 @@ Route::middleware(['auth', 'roleAdmin:admin'])->group(function(){
 });
 Route::middleware(['auth', 'roleAnggota:anggota'])->group(function(){
     Route::resource('anggota/dashboard', DashboardController::class);
+    Route::resource('anggota/request', TransaksiController::class);
+    Route::resource('anggota/perpustakaan', PerpustakaanController::class);
 });
 // Route::get('/', function () {
 //     return view('layouts.app');

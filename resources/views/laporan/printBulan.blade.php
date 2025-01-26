@@ -121,7 +121,7 @@
                     <td>{{ $item->anggota->nama_anggota }}</td>
                     <td>{{ $item->pustaka->judul_pustaka }}</td>
                     <td>{{ $item->tgl_pinjam }}</td>
-                    <td>{{ $item->tgl_kembali }}</td>
+                    <td>{{ $item->tgl_pengembalian }}</td>
                     <td>Rp.{{ number_format($item->denda) }}</td>
                     <td>
                         @if($item->fp == '1')

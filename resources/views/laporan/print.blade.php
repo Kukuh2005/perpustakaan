@@ -118,7 +118,7 @@
                     <td>{{ $laporan->anggota->nama_anggota }}</td>
                     <td>{{ $laporan->pustaka->judul_pustaka }}</td>
                     <td>{{ $laporan->tgl_pinjam }}</td>
-                    <td>{{ $laporan->tgl_kembali }}</td>
+                    <td>{{ $laporan->tgl_pengembalian }}</td>
                     <td>Rp.{{ number_format($laporan->denda) }}</td>
                     <td>
                         @if($laporan->fp == '1')

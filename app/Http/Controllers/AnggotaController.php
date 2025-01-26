@@ -75,6 +75,7 @@ class AnggotaController extends Controller
             $anggota->save();
 
             $user = new User;
+            $user->id_anggota = $anggota->id;
             $user->name = $request->username;
             $user->email = $request->email;
             $user->password = Hash::make($request->password);

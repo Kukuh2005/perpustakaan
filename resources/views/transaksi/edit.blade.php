@@ -16,22 +16,16 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label for="exampleInputPassword1">Anggota</label>
-                                <select name="id_anggota" class="form-control" id="" required>
-                                    <option value="">Pilih Anggota...</option>
-                                    @foreach($anggota as $ag)
-                                    <option value="{{$ag->id}}" {{$ag->id == $item->id_anggota ? 'selected' : ''}}>{{$ag->nama_anggota}}</option>
-                                    @endforeach
+                                <select name="id_anggota" class="form-control" id="" required readonly>
+                                    <option value="{{$item->id_anggota}}" selected>{{$item->anggota->nama_anggota}}</option>
                                 </select>
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label for="exampleInputPassword1">Buku</label>
-                                <select name="id_pustaka" class="form-control" id="" required>
-                                    <option value="">Pilih Buku...</option>
-                                    @foreach($buku as $bk)
-                                    <option value="{{$bk->id}}" {{$bk->id == $item->id_pustaka ? 'selected' : ''}}>{{$bk->judul_pustaka}}</option>
-                                    @endforeach
+                                <select name="id_pustaka" class="form-control" id="" required readonly>
+                                    <option value="{{$item->id_pustaka}}" selected>{{$item->pustaka->judul_pustaka}}</option>
                                 </select>
                             </div>
                         </div>
@@ -78,13 +72,15 @@
                             <div class="form-group">
                                 <label for="exampleInputPassword1">Tanggal Pengembalian</label>
                                 <input type="date" class="form-control" id="exampleInputPassword1" name="tgl_pengembalian"
-                                @if($item->tgl_pinjam == '')
+                                @if($item->tgl_pinjam == '' || $item->tgl_pengembalian == '')
                                 value="<?php echo date('Y-m-d') ?>"
+                                min="<?php echo date('Y-m-d') ?>"
                                 @else
                                 value="{{$item->tgl_pengembalian}}" 
                                 min="{{$item->tgl_pinjam}}" 
+                                required
                                 @endif
-                                required>
+                                >
                             </div>
                         </div>
                         <div class="col-md-12">

@@ -4,9 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Models\Transaksi;
 use App\Models\Anggota;
+use App\Models\JenisAnggota;
 use App\Models\Pustaka;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Auth;
 
 class TransaksiController extends Controller
 {
@@ -15,11 +17,16 @@ class TransaksiController extends Controller
      */
     public function index()
     {
+        
         $transaksi = Transaksi::orderBy('created_at', 'desc')->get();
         $anggota = Anggota::all();
         $buku = Pustaka::where('fp', '1')->get();
-
-        return view('transaksi.index', compact('transaksi', 'anggota', 'buku'));
+        
+        if(Auth::user()->role == 'anggota'){
+            return view('request.index', compact('buku'));
+        }else{
+            return view('transaksi.index', compact('transaksi', 'anggota', 'buku'));
+        }
     }
 
     /**
@@ -36,18 +43,38 @@ class TransaksiController extends Controller
     public function store(Request $request)
     {
         try{
+            $anggota = Anggota::findOrFail($request->id_anggota);//mendapatkan data anggota
+            $jenis = JenisAnggota::findOrFail($anggota->id_jenis_anggota);//mendapaatkan jenis anggota
+            $cek_transaksi = Transaksi::where('id_anggota', $request->id_anggota)
+            ->whereNotIn('fp', ['1', '2'])
+            ->get();//mendapatkan data anggo pada tabel transaksi
+
+            if($cek_transaksi->count() >= $jenis->max_pinjam){                
+                return back()->with('gagal', $anggota->username . ' Sudah Memenuhi Maksimal Pinjam');
+            }
+
             $transaksi = new Transaksi;
             $transaksi->id_pustaka = $request->id_pustaka;
             $transaksi->id_anggota = $request->id_anggota;
             $transaksi->tgl_pinjam = $request->tgl_pinjam;
             $transaksi->tgl_kembali = $request->tgl_kembali;
-            $transaksi->fp = '0';
+            if($request->fp == '3'){//jika status sama dengan request
+                $transaksi->fp = '3';
+            }else{
+                $transaksi->fp = '0';
+            }
             $transaksi->keterangan = $request->keterangan;
             $transaksi->save();
             
-            $buku = Pustaka::findOrFail($request->id_pustaka);
-            $buku->jml_pinjam = $buku->jml_pinjam + 1;
-            $buku->update();
+            if($request->fp != '3'){//jika status bukan request, update jumlah pinjam buku
+                $buku = Pustaka::findOrFail($request->id_pustaka);
+                $buku->jml_pinjam = $buku->jml_pinjam + 1;
+                $buku->update();
+            }
+
+            if(Auth::user()->role == 'anggota'){//jika anggota,kembali ke dashboard
+                return redirect('anggota/dashboard')->with('gagal', $anggota->username . ' Sudah Memenuhi Maksimal Pinjam');
+            }
 
             return back()->with('sukses', 'Berhasil Simpan Transaksi');
         }catch(\Exception $e){
@@ -87,6 +114,11 @@ class TransaksiController extends Controller
                 $denda += $buku->denda_hilang;
             }
             
+            if($transaksi->fp == '3'){//jika status sama dengan request, update jumlah pinjam buku
+                $buku->jml_pinjam = $buku->jml_pinjam + 1;
+                $buku->update();
+            }
+
             $tanggal_kembali = Carbon::parse($request->tgl_kembali);
             $tanggal_pengembalian = Carbon::parse($request->tgl_pengembalian);
             

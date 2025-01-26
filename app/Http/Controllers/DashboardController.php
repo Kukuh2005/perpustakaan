@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Transaksi;
 use App\Models\Pustaka;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Auth;
 
 class DashboardController extends Controller
 {
@@ -16,6 +17,22 @@ class DashboardController extends Controller
     {
         $now = Carbon::now();
         $hari_ini = now()->year . '-' . now()->month . '-' . now()->day;
+
+        if(Auth::user()->role == 'anggota'){//jika role anggota
+            $riwayat = Transaksi::where('id_anggota', Auth::user()->id_anggota)
+            ->orderBy('created_at', 'desc')
+            ->get();
+
+            $transaksi = Transaksi::where('id_anggota', Auth::user()->id_anggota)
+            ->whereIn('fp', ['0', '3'])
+            ->get();
+            
+            $dipinjam = Transaksi::where('id_anggota', Auth::user()->id_anggota)
+            ->where('fp', '0')
+            ->get();
+
+            return view('dashboard.index', compact('riwayat', 'transaksi', 'dipinjam'));
+        }
 
         $request = Transaksi::where('fp', '3')->get();
         $buku = Pustaka::where('fp', '1')->get();

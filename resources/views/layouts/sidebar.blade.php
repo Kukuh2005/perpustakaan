@@ -18,10 +18,10 @@
             <span>Dashboard</span></a>
     </li>
 
+    @if(auth()->user()->role == 'admin')
     <!-- Divider -->
     <hr class="sidebar-divider">
 
-    @if(auth()->user()->role == 'admin')
     <!-- Heading -->
     <div class="sidebar-heading text-muted">
         Data Master
@@ -76,7 +76,6 @@
             <span>Transaksi</span>
         </a>
     </li>
-    @endif
     
     <hr class="sidebar-divider my-0">
     
@@ -87,6 +86,16 @@
         </a>
     </li>
     
+    @endif
+    <hr class="sidebar-divider my-0">
+    
+    <li class="nav-item {{Route::is('request.index') ? 'active' : ''}}">
+        <a class="nav-link" href="/{{auth()->user()->role}}/request">
+            <i class="fas fa-question-circle"></i>
+            <span>Request</span>
+        </a>
+    </li>
+
     <hr class="sidebar-divider my-0">
     
     <li class="nav-item {{Route::is('perpustakaan.index') ? 'active' : ''}}">

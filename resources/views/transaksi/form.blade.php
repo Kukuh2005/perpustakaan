@@ -36,13 +36,13 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label for="exampleInputPassword1">Tanggal Pinjam</label>
-                                <input type="date" class="form-control" id="exampleInputPassword1" name="tgl_pinjam" value="<?php echo date('Y-m-d') ?>" required>
+                                <input type="date" class="form-control" id="exampleInputPassword1" name="tgl_pinjam" value="<?php echo date('Y-m-d') ?>" max="<?php echo date('Y-m-d') ?>" required>
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label for="exampleInputPassword1">Tanggal Kembali</label>
-                                <input type="date" class="form-control" id="exampleInputPassword1" name="tgl_kembali" value="<?php echo date('Y-m-d') ?>" required>
+                                <input type="date" class="form-control" id="exampleInputPassword1" name="tgl_kembali" value="<?php echo date('Y-m-d') ?>" min="<?php echo date('Y-m-d') ?>" required>
                             </div>
                         </div>
                         <div class="col-md-12">
