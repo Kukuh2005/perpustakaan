@@ -97,9 +97,11 @@
 </head>
 <body>
     <header>
-        <h1>Laporan Transaksi Bulanan</h1>
-        <h2>Perpustakaan SMA Starlight</h2>
-        <p>Bulan: {{ \Carbon\Carbon::now()->format('F Y') }}</p>
+        <div class="kop-surat">
+            <h1>{{ $perpustakaan->nama_perpustakaan }}</h1>
+            <h2>{{ $perpustakaan->alamat }}</h2>
+            <p>Telepon: {{ $perpustakaan->no_telp }} | Email: {{ $perpustakaan->email }}</p>
+        </div>        
     </header>
     <div class="content">
         <table>

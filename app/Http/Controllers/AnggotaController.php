@@ -8,6 +8,7 @@ use App\Models\JenisAnggota;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Auth;
 
 class AnggotaController extends Controller
 {
@@ -16,6 +17,13 @@ class AnggotaController extends Controller
      */
     public function index()
     {
+        if(Auth::user()->role == 'anggota'){
+            $anggota = Anggota::findOrFail(Auth::user()->id_anggota);
+            $jenis_anggota = JenisAnggota::all();
+
+            return view('profile.edit', compact('anggota', 'jenis_anggota'));
+        }
+
         $anggota = Anggota::all();
         $jenis_anggota = JenisAnggota::all();
         $kode = $this->generateKode();
@@ -102,6 +110,41 @@ class AnggotaController extends Controller
             $user_anggota->name = $request->username;
             $user_anggota->email = $request->email;
             $user_anggota->update();//update user
+
+            if(Auth::user()->role == 'anggota'){
+                $anggota->nama_anggota = $request->nama_anggota;
+                $anggota->tempat = $request->tempat;
+                $anggota->tgl_lahir = $request->tgl_lahir;
+                $anggota->alamat = $request->alamat;
+                $anggota->no_telp = $request->no_telp;
+                $anggota->email = $request->email;
+                $anggota->username = $request->username;            
+                
+                //jika rubah password
+                if($request->password != null){
+                    $anggota->password =  Hash::make($request->password);
+                    $user_anggota->password =  Hash::make($request->password);
+                }
+    
+                // Proses file foto (jika ada)
+                if ($request->hasFile('foto')) {
+                    $file = $request->file('foto');
+    
+                    // Hapus foto lama jika ada
+                    if ($anggota->foto && \Storage::disk('public')->exists($anggota->foto)) {
+                        \Storage::disk('public')->delete($anggota->foto);
+                    }
+    
+                    // Simpan foto baru ke folder public/storage/foto_anggota
+                    $path = $file->store('foto_anggota', 'public');
+                    $anggota->foto = $path;
+                }
+    
+                $anggota->update();
+    
+    
+                return back()->with('sukses', 'Berhasil Update Data');
+            }
 
             $anggota->id_jenis_anggota = $request->id_jenis_anggota;
             $anggota->nama_anggota = $request->nama_anggota;

@@ -50,7 +50,7 @@
                                         <div class="form-group">
                                             <input type="text" class="form-control form-control-user"
                                                 id="exampleInputEmail" aria-describedby="emailHelp"
-                                                placeholder="Masukkan Nama..." name="name">
+                                                placeholder="Masukkan Nama..." name="name" autofocus>
                                         </div>
                                         <div class="form-group">
                                             <input type="email" class="form-control form-control-user"

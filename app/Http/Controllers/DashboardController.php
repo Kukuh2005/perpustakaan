@@ -20,6 +20,7 @@ class DashboardController extends Controller
 
         if(Auth::user()->role == 'anggota'){//jika role anggota
             $riwayat = Transaksi::where('id_anggota', Auth::user()->id_anggota)
+            ->where('fp', '!=', '3')
             ->orderBy('created_at', 'desc')
             ->get();
 
@@ -38,7 +39,18 @@ class DashboardController extends Controller
         $buku = Pustaka::where('fp', '1')->get();
         $buku_kembali = Transaksi::where('tgl_kembali', $hari_ini)->get();
 
-        return view('dashboard.index', compact('request', 'buku', 'buku_kembali'));
+        $buku_laris = Pustaka::orderBy('jml_pinjam', 'desc')->take(5)->get();
+        $label_buku = [];
+        $jumlah_buku = [];
+
+
+        foreach($buku_laris as $data){
+            $label_buku[] = $data->judul_pustaka;
+            $jumlah_buku[] = $data->jml_pinjam;
+        }
+        $data_buku = collect($label_buku)->zip($jumlah_buku);
+
+        return view('dashboard.index', compact('request', 'buku', 'buku_kembali', 'label_buku', 'jumlah_buku', 'data_buku'));
     }
 
     /**

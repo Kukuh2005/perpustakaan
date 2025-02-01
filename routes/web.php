@@ -46,7 +46,10 @@ Route::middleware(['auth', 'roleAdmin:admin'])->group(function(){
 Route::middleware(['auth', 'roleAnggota:anggota'])->group(function(){
     Route::resource('anggota/dashboard', DashboardController::class);
     Route::resource('anggota/request', TransaksiController::class);
-    Route::resource('anggota/perpustakaan', PerpustakaanController::class);
+    
+    Route::get('anggota/profile', [AnggotaController::class, 'index']);
+    Route::put('anggota/profile/{id}', [AnggotaController::class, 'update']);
+    Route::get('anggota/perpustakaan', [PerpustakaanController::class, 'index']);
 });
 // Route::get('/', function () {
 //     return view('layouts.app');

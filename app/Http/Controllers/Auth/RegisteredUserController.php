@@ -40,6 +40,9 @@ class RegisteredUserController extends Controller
         $user->email = $request->email;
         $user->password = Hash::make($request->password);
         $user->role = $this->cekEmail($request->email);
+        if($user->role == 'anggota'){
+            return redirect('register')->with('gagal', 'Hubungi Admin!.');        
+        }
         $user->status = 'success';
         $user->save();
 
@@ -55,7 +58,7 @@ class RegisteredUserController extends Controller
         if(strpos($email, '@admin.com') !== false){
             return 'admin';
         }else{
-            return back()->with('gagal', 'Hubungi Admin!.');
+            return 'anggota';
         }
     }
 }

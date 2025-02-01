@@ -40,47 +40,47 @@ class TransaksiController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
-    {
-        try{
-            $anggota = Anggota::findOrFail($request->id_anggota);//mendapatkan data anggota
-            $jenis = JenisAnggota::findOrFail($anggota->id_jenis_anggota);//mendapaatkan jenis anggota
-            $cek_transaksi = Transaksi::where('id_anggota', $request->id_anggota)
-            ->whereNotIn('fp', ['1', '2'])
-            ->get();//mendapatkan data anggo pada tabel transaksi
+        public function store(Request $request)
+        {
+            try{
+                $anggota = Anggota::findOrFail($request->id_anggota);//mendapatkan data anggota
+                $jenis = JenisAnggota::findOrFail($anggota->id_jenis_anggota);//mendapaatkan jenis anggota
+                $cek_transaksi = Transaksi::where('id_anggota', $request->id_anggota)
+                ->whereNotIn('fp', ['1', '2'])
+                ->get();//mendapatkan data anggota pada tabel transaksi
 
-            if($cek_transaksi->count() >= $jenis->max_pinjam){                
-                return back()->with('gagal', $anggota->username . ' Sudah Memenuhi Maksimal Pinjam');
-            }
+                if($cek_transaksi->count() > (int)$jenis->max_pinjam){                
+                    return back()->with('gagal', $anggota->username . ' Sudah Memenuhi Maksimal Pinjam');
+                }
 
-            $transaksi = new Transaksi;
-            $transaksi->id_pustaka = $request->id_pustaka;
-            $transaksi->id_anggota = $request->id_anggota;
-            $transaksi->tgl_pinjam = $request->tgl_pinjam;
-            $transaksi->tgl_kembali = $request->tgl_kembali;
-            if($request->fp == '3'){//jika status sama dengan request
-                $transaksi->fp = '3';
-            }else{
-                $transaksi->fp = '0';
-            }
-            $transaksi->keterangan = $request->keterangan;
-            $transaksi->save();
-            
-            if($request->fp != '3'){//jika status bukan request, update jumlah pinjam buku
-                $buku = Pustaka::findOrFail($request->id_pustaka);
-                $buku->jml_pinjam = $buku->jml_pinjam + 1;
-                $buku->update();
-            }
+                $transaksi = new Transaksi;
+                $transaksi->id_pustaka = $request->id_pustaka;
+                $transaksi->id_anggota = $request->id_anggota;
+                $transaksi->tgl_pinjam = $request->tgl_pinjam;
+                $transaksi->tgl_kembali = $request->tgl_kembali;
+                if($request->fp == '3'){//jika status sama dengan request
+                    $transaksi->fp = '3';
+                }else{
+                    $transaksi->fp = '0';
+                }
+                $transaksi->keterangan = $request->keterangan;
+                $transaksi->save();
+                
+                if($request->fp != '3'){//jika status bukan request, update jumlah pinjam buku
+                    $buku = Pustaka::findOrFail($request->id_pustaka);
+                    $buku->jml_pinjam = $buku->jml_pinjam + 1;
+                    $buku->update();
+                }
 
-            if(Auth::user()->role == 'anggota'){//jika anggota,kembali ke dashboard
-                return redirect('anggota/dashboard')->with('gagal', $anggota->username . ' Sudah Memenuhi Maksimal Pinjam');
-            }
+                if(Auth::user()->role == 'anggota'){//jika anggota,kembali ke dashboard
+                    return redirect('anggota/dashboard')->with('sukses', ' Berhasil Request');
+                }
 
-            return back()->with('sukses', 'Berhasil Simpan Transaksi');
-        }catch(\Exception $e){
-            return back()->with('gagal', 'Gagal Simpan Transaksi: ' . $e);
+                return back()->with('sukses', 'Berhasil Simpan Transaksi');
+            }catch(\Exception $e){
+                return back()->with('gagal', 'Gagal Simpan Transaksi: ' . $e);
+            }
         }
-    }
 
     /**
      * Display the specified resource.
@@ -148,8 +148,10 @@ class TransaksiController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Transaksi $transaksi)
+    public function destroy($id)
     {
-        //
+        $transaksi = Transaksi::findOrFail($id)->delete();
+
+        return back()->with('sukses', 'Berhasil Delete');
     }
 }

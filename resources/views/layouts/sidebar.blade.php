@@ -1,7 +1,7 @@
 <ul class="navbar-nav bg-gradient-warning sidebar sidebar-dark accordion" id="accordionSidebar">
 
     <!-- Sidebar - Brand -->
-    <a class="sidebar-brand d-flex align-items-center justify-content-center" href="{{route('dashboard.index')}}">
+    <a class="sidebar-brand d-flex align-items-center justify-content-center" href="/{{auth()->user()->role}}/dashboard">
         <div class="sidebar-brand-icon rotate-n-15">
             <i class="fas fa-book"></i>
         </div>
@@ -21,7 +21,7 @@
     @if(auth()->user()->role == 'admin')
     <!-- Divider -->
     <hr class="sidebar-divider">
-
+    
     <!-- Heading -->
     <div class="sidebar-heading text-muted">
         Data Master
@@ -43,7 +43,7 @@
                 <a class="collapse-item {{Route::is('ddc.index') ? 'active text-warning' : ''}}" href="/{{auth()->user()->role}}/ddc">DDC</a>
                 <a class="collapse-item {{Route::is('format.index') ? 'active text-warning' : ''}}" href="/{{auth()->user()->role}}/format">Format</a>
                 <a class="collapse-item {{Route::is('penerbit.index') ? 'active text-warning' : ''}}" href="/{{auth()->user()->role}}/penerbit">Penerbit</a>
-                <a class="collapse-item {{Route::is('pengarang.index') ? 'active text-warning' : ''}}" href="/{{auth()->user()->role}}/pengarangn">Pengarang</a>
+                <a class="collapse-item {{Route::is('pengarang.index') ? 'active text-warning' : ''}}" href="/{{auth()->user()->role}}/pengarang">Pengarang</a>
                 <a class="collapse-item {{Route::is('pustaka.index') ? 'active text-warning' : ''}}" href="/{{auth()->user()->role}}/pustaka">Pustaka</a>
             </div>
         </div>
@@ -61,7 +61,7 @@
             aria-labelledby="headingAnggota" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
                 <h6 class="collapse-header text-muted">Manajemen Anggota:</h6>
-                <a class="collapse-item {{Route::is('jenis-anggota.index') ? 'active text-warning' : ''}}" href="/{{auth()->user()->role}}/jenis">Jenis</a>
+                <a class="collapse-item {{Route::is('jenis-anggota.index') ? 'active text-warning' : ''}}" href="/{{auth()->user()->role}}/jenis-anggota">Jenis</a>
                 <a class="collapse-item {{Route::is('anggota.index') ? 'active text-warning' : ''}}" href="/{{auth()->user()->role}}/anggota">Anggota</a>
             </div>
         </div>
@@ -87,6 +87,7 @@
     </li>
     
     @endif
+    @if(auth()->user()->role == 'anggota')
     <hr class="sidebar-divider my-0">
     
     <li class="nav-item {{Route::is('request.index') ? 'active' : ''}}">
@@ -98,7 +99,17 @@
 
     <hr class="sidebar-divider my-0">
     
-    <li class="nav-item {{Route::is('perpustakaan.index') ? 'active' : ''}}">
+    <li class="nav-item {{Request::is(auth()->user()->role . '/profile*') ? 'active' : ''}}">
+        <a class="nav-link" href="/{{auth()->user()->role}}/profile">
+            <i class="fas fa-user"></i>
+            <span>Profile</span>
+        </a>
+    </li>
+    @endif
+    
+    <hr class="sidebar-divider my-0">
+    
+    <li class="nav-item {{Request::is(auth()->user()->role . '/perpustakaan*') ? 'active' : ''}}">
         <a class="nav-link" href="/{{auth()->user()->role}}/perpustakaan">
             <i class="fas fa-book-reader"></i>
             <span>Perpustakaan</span>
