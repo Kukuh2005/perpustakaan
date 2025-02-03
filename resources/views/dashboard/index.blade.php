@@ -133,6 +133,7 @@
             <p class="card-text"><strong>Kategori:</strong> {{ $item->pustaka->format->format }}</p>
             <p class="card-text"><strong>Tahun Terbit:</strong> {{ $item->pustaka->tahun_terbit }}</p>
             <p class="card-text"><strong>Tanggal Kembali:</strong> {{ $item->tgl_kembali ?? '-' }}</p>
+            <p class="card-text"><strong>Harga:</strong> Rp{{ number_format($item->pustaka->harga_buku) ?? '-' }}</p>
             <p class="card-text"><strong>Status:</strong> <span
                     class="badge {{ $item->fp == 0 ? 'badge-warning' : 'badge-info' }}">{{ $item->fp == 0 ? 'Dipinjam' : 'Request' }}</span>
             </p>

@@ -17,6 +17,7 @@
             <p class="card-text"><strong>Penerbit:</strong> {{ $item->penerbit->nama_penerbit }}</p>
             <p class="card-text"><strong>Kategori:</strong> {{ $item->format->format }}</p>
             <p class="card-text"><strong>Tahun Terbit:</strong> {{ $item->tahun_terbit }}</p>
+            <p class="card-text"><strong>Harga:</strong> Rp{{ number_format($item->harga_buku) }}</p>
             <p class="card-text"><strong>Abstraksi:</strong> {{ $item->abstraksi }}</p>
         </div>
         <div class="card-footer text-center">
